@@ -1,26 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { useEffect , useState} from 'react';
 import axios from 'axios';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import { NativeRouter, Route, Link } from 'react-router-native';
+import Qr  from './components/Qr/index';
+import Home from './components/Home/index'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import Profile from './components/Profile';
 
 
-export default function App() {
+ function MyTab() {
   const [data, setData] = useState([]);
   const [render, setRender] = useState(false);
+  const Tab = createBottomTabNavigator();
+
+  // scan
+  
+
     useEffect(() => {
       async function render () {
-        axios.get('http://192.168.10.14:3001/data')
+        axios.get('http://192.168.1.15/data')
         .then(data => setData(data.data));
       }
       render();
+
     },[render])
     console.log(data);
+
+    // scan
+    
 
     
   
     async function handlerPostSV() {
      try {
-      await axios.post('http:/192.168.10.14:3001/data',{
+      await axios.post('http://192.168.1.5data',{
         name: "triet",
         age: 54,
         address: "123/3e st"
@@ -33,22 +50,45 @@ export default function App() {
     }
 
   return (
-    <View style={styles.container}>
-      {
-        data.map((sinhvien) =>{
-          return(
-            <View key={sinhvien.id}>
-              <Text >
-                {sinhvien.name}+{sinhvien.age}+{sinhvien.address}
-              </Text>
-            </View>
-          )
-        })
-        
-      }
-      <StatusBar style="auto" />
-      <Button onPress={handlerPostSV} title="ADD"/>
-    </View>
+      
+      <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+      }}
+    >
+      <Tab.Screen
+        name="HOME PAGE"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="QR SCAN"
+        component={Qr}
+        options={{
+          tabBarLabel: 'QR Scan',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="qrcode" color={color} size={size} />
+          ),
+        }}
+      />
+      
+      {/* <Tab.Screen
+        name="Profile"
+        component={Home}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      /> */}
+    </Tab.Navigator>
   );
 }
 
@@ -60,3 +100,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTab />
+    </NavigationContainer>
+  );
+}
