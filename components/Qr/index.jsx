@@ -28,11 +28,11 @@ export default function Qr() {
     setScanned(true);
     /* alert(`Bar code with type ${type} and data ${data} has been scanned!`); */
    console.log(data);
-   const getLoHaiSan = await axios.get(`http://192.168.1.6:3001/data/${data}`);
+   const getLoHaiSan = await axios.get(`http://192.168.1.10:3001/data/${data}`);
    setLoHaiSan(getLoHaiSan.data.data[1]);
-   const getsanpham = await axios.get(`http://192.168.1.6:3001/data/sanpham/${getLoHaiSan.data.data[1].idsanpham}`);
+   const getsanpham = await axios.get(`http://192.168.1.10:3001/data/sanpham/${getLoHaiSan.data.data[1].idsanpham}`);
    setSanPham(getsanpham.data[0]);
-   const getDonViNuoi = await axios.get(`http://192.168.1.6:3001/data/donvinuoi/${getLoHaiSan.data.data[1].idnuoi}`);
+   const getDonViNuoi = await axios.get(`http://192.168.1.10:3001/data/donvinuoi/${getLoHaiSan.data.data[1].idnuoi}`);
    setDonViNuoi(getDonViNuoi.data[0]);
    setLoading(false)
   };
@@ -57,20 +57,20 @@ export default function Qr() {
     <View style={styles.qrdata}>
          {!loading ?  
          <View style={styles.textcs}>
-           <Text  style={{fontSize: 20, fontWeight: 'bold'}}>SAN PHAM </Text>
+           <Text  style={{fontSize: 20, fontWeight: 'bold'}}>Thông Tin Sản Phẩm</Text>
             <Text>Tên sản phẩm: {sanPham.tensanpham}</Text>
-            <Image source={{uri: `${sanPham.anh}`}} style={{width: 300, height: 140}} />
-            <Text>Giá của sản phẩm{sanPham.giasanpham}</Text>
-            <Text>Mô tả{sanPham.mota}</Text>
-           <Text style={{fontSize: 20,fontWeight: 'bold'}}>LO HAI SAN </Text>
-           <Text>Khoi luong: {loHaiSan.khoiluong}</Text>
-           <Text>Ngay danh bat: {moment(loHaiSan.ngaydanhbat).format('DD/MM/YYYY')}</Text>
-           <Text>Ngay che bien: {moment(loHaiSan.ngaychebien).format('DD/MM/YYYY')}</Text>
-           <Text>Ngay nuoi: {moment(loHaiSan.ngaynuoi).format('DD/MM/YYYY')}</Text>
-           <Text style={{fontSize: 20,fontWeight: 'bold'}}>DON VI NUOI </Text>
-           <Text>Giá của sản phẩm{donViNuoi.diachinuoi}</Text>
-           <Text>Giá của sản phẩm{donViNuoi.sdt_dvnuoi}</Text>
-           <Text>So luong sản phẩm{loHaiSan.soluong}</Text>
+            <Text>Giá của sản phẩm: {sanPham.giasanpham}</Text>
+            <Text>Mô tả: {sanPham.mota}</Text>
+            <Image source={{uri: `${sanPham.anh}`}} style={{width: 250, height: 100}} />
+           <Text style={{fontSize: 20,fontWeight: 'bold'}}>Thông Tin Lô Hải Sản </Text>
+           <Text>Khối Lượng: {loHaiSan.khoiluong}</Text>
+           <Text>Ngày Đánh Bắt: {moment(loHaiSan.ngaydanhbat).format('DD/MM/YYYY')}</Text>
+           <Text>Ngày Chế Biến: {moment(loHaiSan.ngaychebien).format('DD/MM/YYYY')}</Text>
+           <Text>Ngày Nuôi: {moment(loHaiSan.ngaynuoi).format('DD/MM/YYYY')}</Text>
+           <Text>Số lượng sản phẩm: {loHaiSan.soluong}</Text>
+           <Text style={{fontSize: 20,fontWeight: 'bold'}}>Thông Tin Đơn Vị Nuôi </Text>
+           <Text>Địa chỉ nuôi: {donViNuoi.diachinuoi}</Text>
+           <Text>Số điện thoại: {donViNuoi.sdt_dvnuoi}</Text>
 
           </View>
            : <Text>loading...</Text>
