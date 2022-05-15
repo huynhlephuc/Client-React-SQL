@@ -35,7 +35,7 @@ import Profile from './components/Profile';
 
     
   
-    async function handlerPostSV() {
+    /* async function handlerPostSV() {
      try {
       await axios.post('http://192.168.1.5data',{
         name: "triet",
@@ -47,7 +47,7 @@ import Profile from './components/Profile';
        
      }
       setRender(!render);
-    }
+    } */
 
   return (
       
@@ -57,7 +57,7 @@ import Profile from './components/Profile';
         tabBarActiveTintColor: '#e91e63',
       }}
     >
-      <Tab.Screen
+     {/*  <Tab.Screen
         name="HOME PAGE"
         component={Home}
         options={{
@@ -66,7 +66,7 @@ import Profile from './components/Profile';
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="QR SCAN"
         component={Qr}
@@ -78,16 +78,16 @@ import Profile from './components/Profile';
         }}
       />
       
-      {/* <Tab.Screen
-        name="Profile"
-        component={Home}
+      <Tab.Screen
+        name="Map"
+        component={Profile}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: 'Google Map',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="map" color={color} size={size} />
           ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 }
