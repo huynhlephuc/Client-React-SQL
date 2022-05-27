@@ -22,7 +22,7 @@ import Profile from './components/Profile';
 
     useEffect(() => {
       async function render () {
-        axios.get('http://192.168.1.15/data')
+        axios.get('http://192.168.1.12/data')
         .then(data => setData(data.data));
       }
       render();
@@ -35,19 +35,6 @@ import Profile from './components/Profile';
 
     
   
-    /* async function handlerPostSV() {
-     try {
-      await axios.post('http://192.168.1.5data',{
-        name: "triet",
-        age: 54,
-        address: "123/3e st"
-      })
-     } catch (error) {
-     console.log("🚀 ~ file: App.js ~ line 29 ~ handlerPostSV ~ error", error)
-       
-     }
-      setRender(!render);
-    } */
 
   return (
       
@@ -57,7 +44,7 @@ import Profile from './components/Profile';
         tabBarActiveTintColor: '#e91e63',
       }}
     >
-     {/*  <Tab.Screen
+      <Tab.Screen
         name="HOME PAGE"
         component={Home}
         options={{
@@ -66,7 +53,7 @@ import Profile from './components/Profile';
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
         name="QR SCAN"
         component={Qr}
@@ -78,7 +65,7 @@ import Profile from './components/Profile';
         }}
       />
       
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Map"
         component={Profile}
         options={{
@@ -87,7 +74,7 @@ import Profile from './components/Profile';
             <MaterialCommunityIcons name="map" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
