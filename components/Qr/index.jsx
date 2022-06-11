@@ -34,13 +34,13 @@ export default function Qr() {
     /* alert(`Bar code with type ${type} and data ${data} has been scanned!`); */
    console.log("Day la id qr",data);
     
-   const getLoHaiSan = await axios.get(`http://192.168.10.110:3001/data/${data}`);
+   const getLoHaiSan = await axios.get(`http://10.0.48.202:3001/data/${data}`);
    console.log("day la id nuoi",getLoHaiSan.data.data[0].idnuoi);
    console.log("lo hai san  + lo hai san",getLoHaiSan.data.data[0])
    setLoHaiSan(getLoHaiSan.data.data[0]);
    /* console.log("lohaisan",loHaiSan); */
 
-    const getDonViNuoi = await axios.get(`http://192.168.10.110:3001/data/donvinuoi/${getLoHaiSan.data.data[0].idnuoi}`);
+    const getDonViNuoi = await axios.get(`http://10.0.48.202:3001/data/donvinuoi/${getLoHaiSan.data.data[0].idnuoi}`);
     setDonViNuoi(getDonViNuoi.data[0]);
     
     /* async () => {
@@ -53,7 +53,7 @@ export default function Qr() {
     await AsyncStorage.setItem('address', (getDonViNuoi.data[0].map))
 
 
-    const getdaily = await axios.get(`http://192.168.10.110:3001/data/daily/${getLoHaiSan.data.data[0].iddaily}`); 
+    const getdaily = await axios.get(`http://10.0.48.202:3001/data/daily/${getLoHaiSan.data.data[0].iddaily}`); 
     setDaily(getdaily.data[0]);
     setLoading(false);
 
